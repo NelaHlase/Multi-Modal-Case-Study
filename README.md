@@ -35,8 +35,8 @@ This projects implements a multimodal image retrieval system using the CLIP mode
 1. Clone the repository
 2. Create a virtual environment 
     - `python -m venv venv`
-    -Windows: `.\venv\Scripts\activate` or `venv\Scripts\activate.bat`
-    -Linux/MacOS: `source venv/bin/activate`
+    - Windows: `.\venv\Scripts\activate` or `venv\Scripts\activate.bat`
+    - Linux/MacOS: `source venv/bin/activate`
 3. Install the dependencies
     - `pip install -r requirements.txt` 
     - `pip install --upgrade pip`
