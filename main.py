@@ -31,15 +31,34 @@ def search_images(query):
         if not query:
             return []
         logger.info(f"Searching for: {query}")
+        
+        # Add timeout and limit processing
+        if not dataset or not dataset.image_features:
+            logger.error("Dataset or image features not initialized")
+            return []
+            
         text_features = retriever.encode_text(query)
+        if text_features is None:
+            logger.warning("Failed to encode text query")
+            return []
+            
         indices, scores = retriever.find_matches(
             text_features,
             dataset.image_features,
             Settings.TOP_K
         )
-        for idx, (index, score) in enumerate(zip(indices, scores), 1):
-            logger.info(f"Match {idx}: Score = {score:.4f}, Image = {dataset.images[index]['path']}")
-        return [dataset.images[idx]['path'] for idx in indices]
+        
+        # Validate results before returning
+        valid_paths = []
+        for idx in indices:
+            if 0 <= idx < len(dataset.images):
+                path = dataset.images[idx]['path']
+                if os.path.exists(path):
+                    valid_paths.append(path)
+                    
+        logger.info(f"Found {len(valid_paths)} valid matches")
+        return valid_paths
+        
     except Exception as e:
         logger.error(f"Search error: {str(e)}")
         return []
@@ -77,7 +96,10 @@ def main():
         # Create and launch interface
         logger.info("Creating interface...")
         interface = create_interface(dataset, retriever)
-        interface.launch(inbrowser=True)
+        interface.launch(
+            inbrowser=True,
+            allowed_paths=[os.path.dirname(Settings.FILE_PATH)]  # Add dataset directory to allowed paths
+        )
     
     except Exception as e:
         logger.error(f"System initialization failed: {str(e)}")

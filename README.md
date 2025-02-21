@@ -48,6 +48,8 @@ This projects implements a multimodal image retrieval system using the CLIP mode
 
 ## Running System
 
+*Due to the size of the dataset, the first run will take a while to download the dataset and process the images. The second run will be faster.*
+
 - Run the application using `python main.py` from the root directory
 - Run the optional application using `python optional.py` from the root directory
 - The application will be available at `http://127.0.0.1:7860`

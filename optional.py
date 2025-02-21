@@ -195,14 +195,13 @@ def main():
                 return_tensors="pt",
                 padding=True
             )
-            image_features = model.get_image_features(**processed_images)
-            dataset.image_features = image_features  # Store in dataset
+            dataset.image_features = model.get_image_features(**processed_images)
         
         # Initialize retriever
         logger.info("Initializing retriever...")
         retriever = ImageRetriever(model, processor)
         # Explicitly set these attributes
-        retriever.image_features = image_features  # Use the local variable 
+        retriever.image_features = dataset.image_features
         retriever.image_paths = [img['path'] for img in dataset.images]
         
         # Create and launch interface
@@ -212,9 +211,10 @@ def main():
         logger.info("Launching interface...")
         interface.launch(
             server_name="127.0.0.1",
-            server_port=None,  # Auto-select available port
+            server_port=None,
             share=False,
-            inbrowser=True
+            inbrowser=True,
+            allowed_paths=[os.path.dirname(Settings.FILE_PATH)] 
         )
     
     except Exception as e:
