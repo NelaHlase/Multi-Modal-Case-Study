@@ -34,17 +34,12 @@ This projects implements a multimodal image retrieval system using the CLIP mode
 
 1. Clone the repository
 2. Create a virtual environment 
+    - `python -m venv venv`
+    -Windows: `.\venv\Scripts\activate` or `venv\Scripts\activate.bat`
+    -Linux/MacOS: `source venv/bin/activate`
 3. Install the dependencies
-4. Environment variables:
-    - Create a .env file in the root directory
-    - Add the following variables:
-        - `MODEL_NAME`: The CLIP model to be used
-        - `FILE_PATH`: The path to the dataset
-        - `NUM_IMAGES`: The number of images to be used
-        - `TOP_K`: The number of results to generate
-        - `MAX_BATCH_SIZE`: Specifies the maximum batch size for image processing
-        - `LOG_LEVEL`: Specifies the logging level
-    - Load the environment variables using `load_dotenv()`
+    - `pip install -r requirements.txt` 
+    - `pip install --upgrade pip`
 
 ## Running System
 
