@@ -38,7 +38,7 @@ This projects implements a multimodal image retrieval system using the CLIP mode
     - Windows: `.\venv\Scripts\activate` or `venv\Scripts\activate.bat`
     - Linux/MacOS: `source venv/bin/activate`
 3. Install the dependencies
-    - `pip install -r requirements.txt` 
+    - `pip install -r requirements.txt` or `pip install torch torchvision transformers gradio Pillow tqdm python-dotenv kaggle gTTs SpeechRecognition pytest`
     - `pip install --upgrade pip`
 
 ## Running System
